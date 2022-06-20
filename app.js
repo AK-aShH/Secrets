@@ -18,6 +18,9 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 // Package to import findOrcreate function in mongoose which is by default not a mongoose method
 const findOrCreate = require('mongoose-findorcreate');
 
+// Facebook autherisation Strategy
+const FacebookStrategy = require('passport-facebook').Strategy;
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -96,6 +99,21 @@ passport.use(new GoogleStrategy({
   }
 ));
 
+// configuring Facebook strategy
+passport.use(new FacebookStrategy({
+    clientID: process.env.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    callbackURL: "https://secret-fjord-40878.herokuapp.com/auth/facebook/secrets",
+    },
+    function(accessToken, refreshToken, profile, cb) { // gets called when the user is authenticated successfully by facebook
+    
+        console.log(profile);
+        User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+            return cb(err, user);
+        });
+    })
+);
+
 
 app.get("/", (req, res) => {
     res.render("home");
@@ -111,6 +129,17 @@ app.get('/auth/google/secrets', passport.authenticate('google', { failureRedirec
     // Successful authentication, redirect home.
     res.redirect('/secrets');
 });
+
+app.get('/auth/facebook', 
+passport.authenticate('facebook', { scope: ['profile'] })); // initiate authentication on facebook servers asking for user's profile
+
+// requested by facebook to authenticate locally
+app.get('/auth/facebook/secrets', passport.authenticate('google', { failureRedirect: '/login' }), function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/secrets');
+});
+
+
 
 app.get("/login", (req, res) => {
     res.render("login");
