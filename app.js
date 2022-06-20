@@ -13,7 +13,7 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 
-// Google autherisation
+// Google autherisation Strategy
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 // Package to import findOrcreate function in mongoose which is by default not a mongoose method
 const findOrCreate = require('mongoose-findorcreate');
