@@ -39,7 +39,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Database Connection
-mongoose.connect('mongodb+srv://admin-akash:Test36437@cluster0.uaeiwmm.mongodb.net/Secrets', function(err) {
+mongoose.connect(process.env.MONGODB_URL, function(err) {
     if (err) {
         console.log(err);
         } else {
