@@ -132,7 +132,7 @@ app.get('/auth/google/secrets', passport.authenticate('google', { failureRedirec
 });
 
 app.get('/auth/facebook', 
-passport.authenticate('facebook', { scope: ['profile'] })); // initiate authentication on facebook servers asking for user's profile
+passport.authenticate('facebook')); // initiate authentication on facebook servers asking for user's profile
 
 // requested by facebook to authenticate locally
 app.get('/auth/facebook/secrets', passport.authenticate('google', { failureRedirect: '/login' }), function(req, res) {
