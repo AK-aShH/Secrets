@@ -135,7 +135,7 @@ app.get('/auth/facebook',
 passport.authenticate('facebook')); // initiate authentication on facebook servers asking for user's profile
 
 // requested by facebook to authenticate locally
-app.get('/auth/facebook/secrets', passport.authenticate('google', { failureRedirect: '/login' }), function(req, res) {
+app.get('/auth/facebook/secrets', passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/secrets');
 });
