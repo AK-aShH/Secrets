@@ -1,6 +1,6 @@
 # Secrets
 A platform where you can share your secrets and insecurities anonymously!, where you can confront your insecurities rather avoiding them.
-With Third party authentication with Google and Facebook.
+- Third party authentication with Google and Facebook.
 
 ## Website Preview
 <img width="768" alt="Screenshot 2022-06-21 094014" src="https://user-images.githubusercontent.com/81186992/174715066-8833bd04-463b-4bef-80a4-cfbbc6d1831f.png">
